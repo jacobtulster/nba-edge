@@ -15,8 +15,10 @@ import pandas as pd
 
 from nba_edge.balldontlie import (
     current_nba_season,
+    fetch_games_for_dates,
     fetch_season_games,
     games_to_dataframe,
+    recent_date_strings,
 )
 from nba_edge.config import DATA_DIR, GAMES_PATH, HISTORICAL_SEASONS
 
@@ -32,42 +34,78 @@ def _save(games: pd.DataFrame) -> None:
     print(f"Completed finals: {len(completed)}")
 
 
+def _seasons_present(games: pd.DataFrame) -> set[int]:
+    if games.empty or "season" not in games.columns:
+        return set()
+    return {int(s) for s in games["season"].dropna().unique().tolist()}
+
+
+def bootstrap_missing_seasons(existing: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Download any missing seasons one at a time, saving after each."""
+    season_now = current_nba_season()
+    wanted = sorted(set(HISTORICAL_SEASONS + [season_now]))
+    games = existing.copy() if existing is not None else pd.DataFrame()
+    have = _seasons_present(games)
+    missing = [s for s in wanted if s not in have]
+
+    if not missing:
+        print("All historical seasons already present.")
+        return games
+
+    print(f"Need seasons: {missing}")
+    for season in missing:
+        print(f"Fetching season {season}…")
+        raw = fetch_season_games(season)
+        part = games_to_dataframe(raw)
+        print(f"  parsed {len(part)} games")
+        games = pd.concat([games, part], ignore_index=True) if not games.empty else part
+        _save(games)
+    return games
+
+
+def incremental_recent(existing: pd.DataFrame, days: int = 14) -> pd.DataFrame:
+    """Hourly path: only refresh the last N days (few API calls)."""
+    season_now = current_nba_season()
+    dates = recent_date_strings(days=days)
+    print(f"Incremental refresh: last {days} days ({dates[-1]} → {dates[0]})")
+    raw = fetch_games_for_dates(dates, season_now)
+    recent = games_to_dataframe(raw)
+    print(f"  fetched {len(recent)} games in window")
+    if recent.empty:
+        return existing
+    # Replace overlapping game_ids with fresh rows
+    keep = existing[~existing["game_id"].isin(recent["game_id"])]
+    return pd.concat([keep, recent], ignore_index=True)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--full",
         action="store_true",
-        help="Re-download all historical seasons (slow; use sparingly)",
+        help="Force re-download of all configured seasons",
     )
     args = parser.parse_args()
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    season_now = current_nba_season()
 
-    if args.full or not GAMES_PATH.exists():
-        seasons = sorted(set(HISTORICAL_SEASONS + [season_now]))
-        print(f"Full refresh for seasons: {seasons}")
-        frames = []
-        for season in seasons:
-            print(f"Fetching season {season}…")
-            raw = fetch_season_games(season)
-            df = games_to_dataframe(raw)
-            print(f"  {len(df)} games")
-            frames.append(df)
-        games = pd.concat(frames, ignore_index=True)
-        _save(games)
+    if args.full:
+        if GAMES_PATH.exists():
+            GAMES_PATH.unlink()
+        bootstrap_missing_seasons()
         return 0
 
-    # Incremental: keep history, refresh current season only
+    if not GAMES_PATH.exists():
+        print("No local DB yet — bootstrapping season by season.")
+        bootstrap_missing_seasons()
+        return 0
+
     existing = pd.read_csv(GAMES_PATH)
     existing["game_date"] = pd.to_datetime(existing["game_date"], errors="coerce")
-    print(f"Incremental refresh for season {season_now}…")
-    raw = fetch_season_games(season_now)
-    current = games_to_dataframe(raw)
-    print(f"  {len(current)} current-season games")
 
-    prior = existing[existing["season"] != season_now]
-    games = pd.concat([prior, current], ignore_index=True)
+    # Fill any missing historical seasons, then do a cheap recent-window update
+    games = bootstrap_missing_seasons(existing)
+    games = incremental_recent(games, days=14)
     _save(games)
     return 0
 

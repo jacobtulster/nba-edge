@@ -1,12 +1,17 @@
 from __future__ import annotations
 
+import os
 import time
+from datetime import date, timedelta
 from typing import Any
 
 import pandas as pd
 import requests
 
 from nba_edge.config import BALLDONTLIE_API_KEY, BALLDONTLIE_GAMES_URL
+
+# Free-tier safe default: ~4 requests/minute
+REQUEST_DELAY = float(os.environ.get("NBA_EDGE_REQUEST_DELAY", "1.5"))
 
 
 def _headers() -> dict[str, str]:
@@ -17,33 +22,39 @@ def _headers() -> dict[str, str]:
     return {"Authorization": BALLDONTLIE_API_KEY}
 
 
-def _get(params: list[tuple[str, Any]], max_retries: int = 4) -> dict:
+def _get(params: list[tuple[str, Any]], max_retries: int = 12) -> dict:
     for attempt in range(max_retries):
         response = requests.get(
             BALLDONTLIE_GAMES_URL,
             headers=_headers(),
             params=params,
-            timeout=60,
+            timeout=30,
         )
         if response.status_code == 429:
-            wait = int(response.headers.get("Retry-After", 15))
-            time.sleep(max(wait, 5))
+            wait = min(int(response.headers.get("Retry-After", 20)), 30)
+            print(f"Rate limited (attempt {attempt + 1}/{max_retries}); waiting {wait}s")
+            time.sleep(wait)
             continue
         response.raise_for_status()
+        if REQUEST_DELAY > 0:
+            time.sleep(REQUEST_DELAY)
         return response.json()
     raise RuntimeError("BallDontLie rate limit exceeded after retries.")
 
 
-def fetch_season_games(season: int) -> list[dict]:
-    """Download all regular-season games for a BallDontLie season year."""
+def fetch_games(seasons: list[int], label: str = "games") -> list[dict]:
+    """Paginate games for one or more seasons with progress + safety caps."""
     games: list[dict] = []
     cursor: int | None = None
+    seen_cursors: set[int] = set()
+    page = 0
+    max_pages = 80
 
-    while True:
-        params: list[tuple[str, Any]] = [
-            ("seasons[]", season),
-            ("per_page", 100),
-        ]
+    while page < max_pages:
+        page += 1
+        params: list[tuple[str, Any]] = [("per_page", 100)]
+        for season in seasons:
+            params.append(("seasons[]", season))
         if cursor is not None:
             params.append(("cursor", cursor))
 
@@ -53,22 +64,42 @@ def fetch_season_games(season: int) -> list[dict]:
 
         meta = payload.get("meta") or {}
         next_cursor = meta.get("next_cursor")
+        print(f"  {label} page {page}: +{len(batch)} (total {len(games)})")
+
         if not next_cursor or not batch:
             break
+        if next_cursor in seen_cursors:
+            print("  Stopping: repeated cursor.")
+            break
+        seen_cursors.add(next_cursor)
         cursor = next_cursor
-        time.sleep(0.35)
 
     return games
 
 
-def fetch_games_for_date(date_iso: str, season: int) -> list[dict]:
+def fetch_season_games(season: int) -> list[dict]:
+    return fetch_games([season], label=f"season {season}")
+
+
+def fetch_games_for_dates(dates: list[str], season: int) -> list[dict]:
+    """Fetch a small date window (used for hourly incremental updates)."""
     params: list[tuple[str, Any]] = [
-        ("dates[]", date_iso),
         ("seasons[]", season),
         ("per_page", 100),
     ]
+    for d in dates:
+        params.append(("dates[]", d))
     payload = _get(params)
     return payload.get("data") or []
+
+
+def fetch_games_for_date(date_iso: str, season: int) -> list[dict]:
+    return fetch_games_for_dates([date_iso], season)
+
+
+def recent_date_strings(days: int = 14, today: date | None = None) -> list[str]:
+    today = today or date.today()
+    return [(today - timedelta(days=i)).isoformat() for i in range(days)]
 
 
 def games_to_dataframe(raw_games: list[dict]) -> pd.DataFrame:

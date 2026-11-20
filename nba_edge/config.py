@@ -34,7 +34,8 @@ MODEL_B_FEATURES = [
 ]
 
 # Seasons to keep in the local DB (BallDontLie season = start year)
-HISTORICAL_SEASONS = [2022, 2023, 2024, 2025, 2026]
+# Three completed + current is enough for Model B on free-tier API limits.
+HISTORICAL_SEASONS = [2024, 2025, 2026]
 
 RUN_HOUR_START_ET = 8
 RUN_HOUR_END_ET = 23  # inclusive (11pm Eastern)
