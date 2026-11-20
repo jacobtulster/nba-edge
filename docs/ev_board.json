@@ -1,0 +1,10 @@
+{
+  "generated_at_et": null,
+  "date": null,
+  "season": null,
+  "model": "Model B (logistic moneyline)",
+  "training_games": 0,
+  "game_count": 0,
+  "games": [],
+  "note": "Waiting for the first pipeline run. After GitHub secrets are set, the hourly job will fill this board."
+}

@@ -1,0 +1,144 @@
+:root {
+  --ink: #14201b;
+  --muted: #4d5c55;
+  --paper: #f3f6f2;
+  --line: #d5ddd7;
+  --good: #1f7a4c;
+  --bad: #9b2f2f;
+  --accent: #c45c26;
+  --shadow: 0 18px 50px rgba(20, 32, 27, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(196, 92, 38, 0.16), transparent 45%),
+    radial-gradient(ellipse at 90% 10%, rgba(31, 122, 76, 0.12), transparent 40%),
+    linear-gradient(180deg, #eef3ec 0%, #f7f8f5 55%, #f3f6f2 100%);
+}
+
+main {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.brand {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+h1 {
+  margin: 0.6rem 0 0.4rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.lede {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.meta {
+  margin: 1.25rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.table-wrap {
+  margin-top: 1.75rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+th {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.matchup {
+  font-weight: 700;
+}
+
+.ev-pos {
+  color: var(--good);
+  font-weight: 700;
+}
+
+.ev-neg {
+  color: var(--bad);
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 0.85rem;
+}
+
+.pill.hot {
+  border-color: rgba(31, 122, 76, 0.35);
+  background: rgba(31, 122, 76, 0.1);
+  color: var(--good);
+  font-weight: 700;
+}
+
+footer {
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  th:nth-child(3),
+  td:nth-child(3),
+  th:nth-child(5),
+  td:nth-child(5) {
+    display: none;
+  }
+}
