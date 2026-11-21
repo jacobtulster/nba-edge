@@ -2877,7 +2877,7 @@ game_id,game_date,datetime_utc,season,postseason,status,status_state,home_team,a
 21718153,2026-11-20,2026-11-21T02:30:00.000Z,2026,False,Final,final,Utah Jazz,Phoenix Suns,UTA,PHX,101,111
 21718154,2026-11-20,2026-11-21T03:00:00.000Z,2026,False,Final,final,Denver Nuggets,Houston Rockets,DEN,HOU,133,124
 21718155,2026-11-20,2026-11-21T03:00:00.000Z,2026,False,Final,final,Los Angeles Lakers,Sacramento Kings,LAL,SAC,106,104
-21718156,2026-11-21,2026-11-21T18:00:00.000Z,2026,False,2026-11-21T18:00:00Z,scheduled,Philadelphia 76ers,Milwaukee Bucks,PHI,MIL,0,0
+21718156,2026-11-21,2026-11-21T18:00:00.000Z,2026,False,Final,final,Philadelphia 76ers,Milwaukee Bucks,PHI,MIL,132,129
 21718157,2026-11-21,2026-11-22T00:30:00.000Z,2026,False,2026-11-22T00:30:00Z,scheduled,New York Knicks,Portland Trail Blazers,NYK,POR,0,0
 21718158,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,2026-11-22T01:00:00Z,scheduled,Dallas Mavericks,LA Clippers,DAL,LAC,0,0
 21718159,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,2026-11-22T01:00:00Z,scheduled,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,0,0
