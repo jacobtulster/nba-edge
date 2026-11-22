@@ -1,17 +1,90 @@
 {
-  "updatedAt": "2026-11-22T02:48:54.850500+00:00",
+  "updatedAt": "2026-11-22T09:13:34.858586+00:00",
   "minEv": 0.0,
   "summary": {
     "picks": 6,
-    "graded": 0,
-    "w": 0,
-    "l": 0,
+    "graded": 6,
+    "w": 1,
+    "l": 5,
     "p": 0,
-    "win_pct": null,
-    "profit_u": 0.0,
-    "roi": null
+    "win_pct": 0.1667,
+    "profit_u": -4.02,
+    "roi": -0.67
   },
-  "equity": [],
+  "equity": [
+    {
+      "n": 1,
+      "when": "2026-11-22T09:13:34.854932+00:00",
+      "matchup": "POR @ NYK",
+      "side": "away",
+      "team": "POR",
+      "result": "L",
+      "profit": -1.0,
+      "cum": -1.0,
+      "pos": 0,
+      "neg": -1.0
+    },
+    {
+      "n": 2,
+      "when": "2026-11-22T09:13:34.854962+00:00",
+      "matchup": "NOP @ SAS",
+      "side": "away",
+      "team": "NOP",
+      "result": "L",
+      "profit": -1.0,
+      "cum": -2.0,
+      "pos": 0,
+      "neg": -2.0
+    },
+    {
+      "n": 3,
+      "when": "2026-11-22T09:13:34.854982+00:00",
+      "matchup": "POR @ NYK",
+      "side": "home",
+      "team": "NYK",
+      "result": "W",
+      "profit": 0.98,
+      "cum": -1.02,
+      "pos": 0,
+      "neg": -1.02
+    },
+    {
+      "n": 4,
+      "when": "2026-11-22T09:13:34.854994+00:00",
+      "matchup": "LAC @ DAL",
+      "side": "away",
+      "team": "LAC",
+      "result": "L",
+      "profit": -1.0,
+      "cum": -2.02,
+      "pos": 0,
+      "neg": -2.02
+    },
+    {
+      "n": 5,
+      "when": "2026-11-22T09:13:34.855005+00:00",
+      "matchup": "BOS @ SAC",
+      "side": "away",
+      "team": "BOS",
+      "result": "L",
+      "profit": -1.0,
+      "cum": -3.02,
+      "pos": 0,
+      "neg": -3.02
+    },
+    {
+      "n": 6,
+      "when": "2026-11-22T09:13:34.855016+00:00",
+      "matchup": "MEM @ MIN",
+      "side": "away",
+      "team": "MEM",
+      "result": "L",
+      "profit": -1.0,
+      "cum": -4.02,
+      "pos": 0,
+      "neg": -4.02
+    }
+  ],
   "picks": [
     {
       "pickKey": "21718157|away",
@@ -38,12 +111,12 @@
       "model_prob": 0.3814,
       "ev": 0.8116,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "L",
+      "profit": -1.0,
+      "gradedAt": "2026-11-22T09:13:34.854932+00:00",
+      "gradeSource": "espn",
+      "awayScore": 96.0,
+      "homeScore": 97.0
     },
     {
       "pickKey": "21718160|away",
@@ -70,12 +143,12 @@
       "model_prob": 0.0772,
       "ev": 1.6251,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "L",
+      "profit": -1.0,
+      "gradedAt": "2026-11-22T09:13:34.854962+00:00",
+      "gradeSource": "espn",
+      "awayScore": 91.0,
+      "homeScore": 114.0
     },
     {
       "pickKey": "21718157|home",
@@ -102,12 +175,12 @@
       "model_prob": 0.6186,
       "ev": 0.2248,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "W",
+      "profit": 0.98,
+      "gradedAt": "2026-11-22T09:13:34.854982+00:00",
+      "gradeSource": "espn",
+      "awayScore": 96.0,
+      "homeScore": 97.0
     },
     {
       "pickKey": "21718158|away",
@@ -134,12 +207,12 @@
       "model_prob": 0.4123,
       "ev": 0.1131,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "L",
+      "profit": -1.0,
+      "gradedAt": "2026-11-22T09:13:34.854994+00:00",
+      "gradeSource": "espn",
+      "awayScore": 100.0,
+      "homeScore": 110.0
     },
     {
       "pickKey": "21718161|away",
@@ -166,12 +239,12 @@
       "model_prob": 0.8821,
       "ev": 0.032,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "L",
+      "profit": -1.0,
+      "gradedAt": "2026-11-22T09:13:34.855005+00:00",
+      "gradeSource": "espn",
+      "awayScore": 96.0,
+      "homeScore": 97.0
     },
     {
       "pickKey": "21718159|away",
@@ -198,12 +271,12 @@
       "model_prob": 0.3511,
       "ev": 0.0183,
       "bucket": "pos_ev",
-      "result": null,
-      "profit": null,
-      "gradedAt": null,
-      "gradeSource": null,
-      "awayScore": null,
-      "homeScore": null
+      "result": "L",
+      "profit": -1.0,
+      "gradedAt": "2026-11-22T09:13:34.855016+00:00",
+      "gradeSource": "espn",
+      "awayScore": 95.0,
+      "homeScore": 104.0
     }
   ]
 }

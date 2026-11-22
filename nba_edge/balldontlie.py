@@ -138,7 +138,12 @@ def games_to_dataframe(raw_games: list[dict]) -> pd.DataFrame:
 def is_final(row: pd.Series) -> bool:
     state = str(row.get("status_state") or "").lower()
     status = str(row.get("status") or "").lower()
-    return state == "final" or status == "final"
+    return (
+        state == "final"
+        or status == "final"
+        or "final" in status
+        or state in {"post", "closed"}
+    )
 
 
 def current_nba_season(today: pd.Timestamp | None = None) -> int:
@@ -149,3 +154,162 @@ def current_nba_season(today: pd.Timestamp | None = None) -> int:
     else:
         today = today.tz_convert("America/New_York")
     return today.year if today.month >= 10 else today.year - 1
+
+
+def merge_prefer_finals(existing: pd.DataFrame, incoming: pd.DataFrame) -> pd.DataFrame:
+    """Replace overlapping game_ids, preferring final / scored rows."""
+    if incoming is None or incoming.empty:
+        return existing
+    if existing is None or existing.empty:
+        return incoming.copy()
+
+    frames = [existing.copy(), incoming.copy()]
+    for frame in frames:
+        frame["game_id"] = pd.to_numeric(frame["game_id"], errors="coerce")
+        state = frame.get("status_state")
+        status = frame.get("status")
+        state_s = state.fillna("").astype(str).str.lower() if state is not None else ""
+        status_s = status.fillna("").astype(str).str.lower() if status is not None else ""
+        has_score = frame["home_points"].notna() & frame["away_points"].notna()
+        is_done = (
+            state_s.eq("final")
+            | status_s.eq("final")
+            | status_s.str.contains("final", na=False)
+        )
+        frame["_prefer"] = is_done.astype(int) * 2 + has_score.astype(int)
+
+    combined = pd.concat(frames, ignore_index=True)
+    combined = combined.sort_values(["game_id", "_prefer"]).drop_duplicates(
+        "game_id", keep="last"
+    )
+    return combined.drop(columns=["_prefer"], errors="ignore").reset_index(drop=True)
+
+
+def _espn_abbr(abbr: str) -> str:
+    """Normalize ESPN abbreviations toward BallDontLie / Odds API codes."""
+    a = str(abbr or "").upper()
+    return {
+        "NY": "NYK",
+        "GS": "GSW",
+        "SA": "SAS",
+        "NO": "NOP",
+        "UTAH": "UTA",
+        "WSH": "WAS",
+    }.get(a, a)
+
+
+def _espn_game_date_et(event_date: str | None, fallback: str) -> str:
+    """Scoreboard dates are requested in ET; keep ET calendar day, not UTC slice."""
+    if not event_date:
+        return str(fallback)[:10]
+    ts = pd.to_datetime(event_date, utc=True, errors="coerce")
+    if pd.isna(ts):
+        return str(event_date)[:10]
+    try:
+        return ts.tz_convert("America/New_York").strftime("%Y-%m-%d")
+    except Exception:  # noqa: BLE001
+        return str(fallback)[:10]
+
+
+def fetch_games_for_dates_espn(dates: list[str]) -> list[dict]:
+    """Public ESPN scoreboard fallback when BallDontLie is unavailable/stale."""
+    out: list[dict] = []
+    for d in dates:
+        ymd = str(d).replace("-", "")[:8]
+        url = (
+            "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/"
+            f"scoreboard?dates={ymd}"
+        )
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+            payload = response.json()
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ESPN scoreboard {d}: {exc}")
+            continue
+        if REQUEST_DELAY > 0:
+            time.sleep(min(REQUEST_DELAY, 0.4))
+        for event in payload.get("events") or []:
+            comp = (event.get("competitions") or [{}])[0]
+            status = ((comp.get("status") or {}).get("type") or {})
+            competitors = comp.get("competitors") or []
+            home = next((c for c in competitors if c.get("homeAway") == "home"), {})
+            away = next((c for c in competitors if c.get("homeAway") == "away"), {})
+            home_team = home.get("team") or {}
+            away_team = away.get("team") or {}
+            completed = bool(status.get("completed")) or str(status.get("name") or "").upper() == "STATUS_FINAL"
+            out.append(
+                {
+                    "id": event.get("id"),
+                    "date": str(d)[:10],  # keep the requested ET slate day
+                    "datetime": event.get("date"),
+                    "season": None,
+                    "postseason": False,
+                    "status": "Final" if completed else (status.get("description") or status.get("name")),
+                    "status_state": "final" if completed else "in_progress",
+                    "home_team": {
+                        "full_name": home_team.get("displayName"),
+                        "name": home_team.get("name"),
+                        "abbreviation": _espn_abbr(home_team.get("abbreviation")),
+                    },
+                    "visitor_team": {
+                        "full_name": away_team.get("displayName"),
+                        "name": away_team.get("name"),
+                        "abbreviation": _espn_abbr(away_team.get("abbreviation")),
+                    },
+                    "home_team_score": home.get("score"),
+                    "visitor_team_score": away.get("score"),
+                    "grade_source": "espn",
+                }
+            )
+    return out
+
+
+def _match_keys(df: pd.DataFrame) -> pd.Series:
+    return (
+        df["away_abbreviation"].astype(str).str.upper()
+        + "|"
+        + df["home_abbreviation"].astype(str).str.upper()
+    )
+
+
+def refresh_scores_for_dates(games: pd.DataFrame, dates: list[str], season: int) -> pd.DataFrame:
+    """Pull fresh scores for specific dates (BDL, then ESPN) and merge."""
+    uniq = sorted({str(d)[:10] for d in dates if d})
+    if not uniq:
+        return games
+    recent = pd.DataFrame()
+    try:
+        raw = fetch_games_for_dates(uniq, season)
+        recent = games_to_dataframe(raw)
+        if not recent.empty:
+            recent["grade_source"] = "balldontlie"
+    except Exception as exc:  # noqa: BLE001
+        print(f"  BDL score refresh failed: {exc}")
+    # Always overlay ESPN finals so we can grade even when BDL lags / lacks a key.
+    espn_raw = fetch_games_for_dates_espn(uniq)
+    espn_df = games_to_dataframe(espn_raw)
+    if not espn_df.empty:
+        espn_df["grade_source"] = "espn"
+        # ESPN ids differ from BDL — remap onto BDL ids by away|home (date±1 tolerant).
+        if games is not None and not games.empty:
+            keyed = games.copy()
+            keyed["_mk"] = _match_keys(keyed)
+            keyed["_d"] = keyed["game_date"].astype(str).str[:10]
+            espn_df["_mk"] = _match_keys(espn_df)
+            espn_df["_d"] = espn_df["game_date"].astype(str).str[:10]
+            id_map: dict[str, Any] = {}
+            for _, r in keyed.iterrows():
+                if pd.isna(r.get("game_id")):
+                    continue
+                id_map[f"{r['_d']}|{r['_mk']}"] = r["game_id"]
+                id_map[str(r["_mk"])] = r["game_id"]
+            mapped = []
+            for _, r in espn_df.iterrows():
+                gid = id_map.get(f"{r['_d']}|{r['_mk']}") or id_map.get(str(r["_mk"]))
+                mapped.append(gid if gid is not None else r["game_id"])
+            espn_df["game_id"] = mapped
+            espn_df = espn_df.drop(columns=["_mk", "_d"], errors="ignore")
+        recent = merge_prefer_finals(recent, espn_df) if not recent.empty else espn_df
+    print(f"  score refresh {uniq[0]}…{uniq[-1]}: {len(recent)} games")
+    return merge_prefer_finals(games, recent)
