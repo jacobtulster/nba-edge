@@ -142,11 +142,93 @@ footer {
   line-height: 1.45;
 }
 
+.roi {
+  margin-top: 2.75rem;
+}
+
+.roi-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+}
+
+.roi h2 {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  letter-spacing: -0.02em;
+  color: #f4f7f5;
+}
+
+.lede.tight {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.65rem;
+  margin: 1.1rem 0 1rem;
+}
+
+.card {
+  border: 1px solid var(--line);
+  background: rgba(23, 29, 26, 0.92);
+  padding: 0.85rem 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.card .k {
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card .v {
+  margin-top: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  background: rgba(23, 29, 26, 0.92);
+  box-shadow: var(--shadow);
+  padding: 0.85rem 0.85rem 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.chart-box {
+  position: relative;
+  height: 300px;
+}
+
+.submeta {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.pill.bad {
+  border-color: rgba(240, 113, 120, 0.35);
+  background: rgba(240, 113, 120, 0.12);
+  color: var(--bad);
+  font-weight: 700;
+}
+
 @media (max-width: 720px) {
   th:nth-child(3),
   td:nth-child(3),
   th:nth-child(5),
   td:nth-child(5) {
     display: none;
+  }
+  .chart-box {
+    height: 240px;
   }
 }

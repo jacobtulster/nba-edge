@@ -28,6 +28,7 @@ from nba_edge.config import (
     MODEL_B_FEATURES,
     TEAM_STATE_PATH,
 )
+from nba_edge.picks import sync_board_picks
 from nba_edge.features import build_team_state, build_training_frame, features_for_matchup
 from nba_edge.model import predict_home_win_prob, train_model_b
 from nba_edge.odds import (
@@ -201,6 +202,9 @@ def main() -> int:
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     EV_BOARD_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(f"Wrote {len(board_rows)} games → {EV_BOARD_PATH}")
+
+    # Persist +EV recommendations and auto-grade finished games for ROI
+    sync_board_picks(payload, games)
     return 0
 
 

@@ -12,6 +12,9 @@ GAMES_PATH = DATA_DIR / "games.csv"
 TEAM_STATE_PATH = DATA_DIR / "team_state.csv"
 MODEL_PATH = DATA_DIR / "model_b.joblib"
 EV_BOARD_PATH = DOCS_DIR / "ev_board.json"
+PICKS_PATH = DOCS_DIR / "picks.json"
+# Auto-log board recommendations at or above this EV (model_prob × decimal − 1)
+MIN_EV_TO_TRACK = float(os.environ.get("NBA_EDGE_MIN_EV", "0") or "0")
 
 load_dotenv(ROOT / ".env")
 

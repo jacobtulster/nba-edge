@@ -7,10 +7,12 @@ You and your friend just open the link. No Colab. No manual refresh every hour.
 ## How to use it
 
 1. Open the GitHub Pages URL for this repo
-2. Read the board
+2. Read the board and the **Tracked +EV ROI** section under it
 
 The model shows **likelihoods**, not guaranteed winners.  
 **EV** = model probability × decimal odds − 1 (best available US book moneyline).
+
+Each hourly run auto-logs topsides with **EV ≥ 0** into `docs/picks.json`, grades them when BallDontLie marks the game final, and updates the ROI equity curve (green above zero / red below).
 
 ## What runs in the background
 
