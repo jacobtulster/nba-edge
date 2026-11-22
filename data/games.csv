@@ -2888,8 +2888,8 @@ game_id,game_date,datetime_utc,season,postseason,status,status_state,home_team,a
 21718159.0,2026-11-21,2026-11-22T01:00:00.000Z,2026.0,False,Final,final,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,104,95,
 21718160.0,2026-11-21,2026-11-22T01:00:00.000Z,2026.0,False,Final,final,San Antonio Spurs,New Orleans Pelicans,SAS,NOP,114,91,
 21718161.0,2026-11-21,2026-11-22T03:00:00.000Z,2026.0,False,Final,final,Sacramento Kings,Boston Celtics,SAC,BOS,97,96,
-21718162.0,2026-11-22,2026-11-22T20:30Z,,False,Scheduled,in_progress,Atlanta Hawks,Detroit Pistons,ATL,DET,0,0,espn
-21718163.0,2026-11-22,2026-11-22T23:00Z,,False,Scheduled,in_progress,Miami Heat,Oklahoma City Thunder,MIA,OKC,0,0,espn
+21718162.0,2026-11-22,2026-11-22T20:30Z,,False,Final,final,Atlanta Hawks,Detroit Pistons,ATL,DET,107,97,espn
+21718163.0,2026-11-22,2026-11-22T23:00Z,,False,In Progress,in_progress,Miami Heat,Oklahoma City Thunder,MIA,OKC,61,47,espn
 21718165.0,2026-11-22,2026-11-23T00:00Z,,False,Scheduled,in_progress,Washington Wizards,Orlando Magic,WAS,ORL,0,0,espn
 21718166.0,2026-11-22,2026-11-23T00:00Z,,False,Scheduled,in_progress,Chicago Bulls,Denver Nuggets,CHI,DEN,0,0,espn
 21718167.0,2026-11-22,2026-11-23T00:00Z,,False,Scheduled,in_progress,Utah Jazz,Dallas Mavericks,UTA,DAL,0,0,espn
