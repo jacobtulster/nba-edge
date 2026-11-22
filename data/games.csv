@@ -2878,10 +2878,10 @@ game_id,game_date,datetime_utc,season,postseason,status,status_state,home_team,a
 21718154,2026-11-20,2026-11-21T03:00:00.000Z,2026,False,Final,final,Denver Nuggets,Houston Rockets,DEN,HOU,133,124
 21718155,2026-11-20,2026-11-21T03:00:00.000Z,2026,False,Final,final,Los Angeles Lakers,Sacramento Kings,LAL,SAC,106,104
 21718156,2026-11-21,2026-11-21T18:00:00.000Z,2026,False,Final,final,Philadelphia 76ers,Milwaukee Bucks,PHI,MIL,132,129
-21718157,2026-11-21,2026-11-22T00:30:00.000Z,2026,False,2026-11-22T00:30:00Z,scheduled,New York Knicks,Portland Trail Blazers,NYK,POR,0,0
-21718158,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,2026-11-22T01:00:00Z,scheduled,Dallas Mavericks,LA Clippers,DAL,LAC,0,0
-21718159,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,2026-11-22T01:00:00Z,scheduled,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,0,0
-21718160,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,2026-11-22T01:00:00Z,scheduled,San Antonio Spurs,New Orleans Pelicans,SAS,NOP,0,0
+21718157,2026-11-21,2026-11-22T00:30:00.000Z,2026,False,4th Qtr,in_progress,New York Knicks,Portland Trail Blazers,NYK,POR,94,94
+21718158,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,3rd Qtr,in_progress,Dallas Mavericks,LA Clippers,DAL,LAC,71,69
+21718159,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,4th Qtr,in_progress,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,83,62
+21718160,2026-11-21,2026-11-22T01:00:00.000Z,2026,False,3rd Qtr,in_progress,San Antonio Spurs,New Orleans Pelicans,SAS,NOP,78,60
 21718161,2026-11-21,2026-11-22T03:00:00.000Z,2026,False,2026-11-22T03:00:00Z,scheduled,Sacramento Kings,Boston Celtics,SAC,BOS,0,0
 21718162,2026-11-22,2026-11-22T20:30:00.000Z,2026,False,2026-11-22T20:30:00Z,scheduled,Atlanta Hawks,Detroit Pistons,ATL,DET,0,0
 21718163,2026-11-22,2026-11-22T23:00:00.000Z,2026,False,2026-11-22T23:00:00Z,scheduled,Miami Heat,Oklahoma City Thunder,MIA,OKC,0,0
