@@ -1,27 +1,28 @@
 # NBA Edge
 
-A shared website that updates itself with **model win probabilities**, **sportsbook prices**, and **expected value (EV)**.
+A shared website that updates itself with **model cover probabilities**, **sportsbook spreads**, and **expected value (EV)**.
 
 You and your friend just open the link. No Colab. No manual refresh every hour.
 
 ## How to use it
 
 1. Open the GitHub Pages URL for this repo
-2. Read the board and the **Tracked +EV ROI** section under it
+2. Read the **ATS** board (primary) and the **Moneyline** bonus tab under ROI
 
-The model shows **likelihoods**, not guaranteed winners.  
-**EV** = model probability × decimal odds − 1 (best available US book moneyline).
+The model shows **likelihoods**, not guaranteed covers.  
+**ATS EV** = cover_prob × decimal odds − 1 (best available US **spread**).  
+**Moneyline** is logged separately as a bonus book — never mixed into ATS ROI.
 
-Each hourly run auto-logs topsides with **EV ≥ 0** into `docs/picks.json`, grades them when BallDontLie marks the game final, and updates the ROI equity curve (green above zero / red below).
+Each hourly run auto-logs +EV ATS (and +EV ML) topsides into `docs/picks.json`, grades them when games finish, and updates each book’s equity curve.
 
 ## What runs in the background
 
 Every hour from **8:00 AM to 11:00 PM Eastern**:
 
 1. Update the games database (BallDontLie)
-2. Train/score Model B (moneyline)
-3. Pull live odds (The Odds API)
-4. Publish `docs/ev_board.json` to the website
+2. Train/score Model B (win prob → spread cover)
+3. Pull live spreads + moneylines (The Odds API)
+4. Publish `docs/ev_board.json` + `docs/picks.json`
 
 Overnight hours are skipped on purpose.
 
@@ -38,7 +39,7 @@ Repo → **Settings** → **Secrets and variables** → **Actions** → **New re
 | Secret name | Where to get it |
 |-------------|-----------------|
 | `BALLDONTLIE_API_KEY` | https://app.balldontlie.io/account |
-| `ODDS_API_KEY` | https://dash.the-odds-api.com/ |
+| `ODDS_API_KEY` | https://dash.the-odds-api.com/ (spreads + moneylines) |
 
 ### 3. Turn on GitHub Pages
 
@@ -77,5 +78,4 @@ Then open `docs/index.html` or serve the `docs/` folder.
 ## Notes
 
 - Free API quotas still apply. Incremental refreshes keep usage down.
-- v1 is **NBA moneyline EV only** (Model B from the Colab research).
-- NHL / player props can come later.
+- Primary book is **NBA ATS / spreads**; moneyline is a **bonus** ledger (Model B from the Colab research).
