@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-24T15:30:39.967797+00:00",
+  "updatedAt": "2026-11-25T00:20:07.303723+00:00",
   "minEv": 0.0,
   "primaryMarket": "spread",
   "summary": {
-    "picks": 21,
+    "picks": 22,
     "graded": 18,
     "w": 12,
     "l": 6,
@@ -13,7 +13,7 @@
     "roi": 0.2761
   },
   "summary_ats": {
-    "picks": 21,
+    "picks": 22,
     "graded": 18,
     "w": 12,
     "l": 6,
@@ -832,6 +832,39 @@
     }
   ],
   "picks": [
+    {
+      "pickKey": "21718181|away|spread",
+      "matchupId": "2026-11-24|DET|at|ORL|away|spread",
+      "loggedAt": "2026-11-25T00:20:01.666642+00:00",
+      "sport": "NBA",
+      "league": "NBA",
+      "date": "2026-11-24",
+      "game_id": 21718181,
+      "away": "Detroit Pistons",
+      "home": "Orlando Magic",
+      "away_abbreviation": "DET",
+      "home_abbreviation": "ORL",
+      "takeSide": "away",
+      "takeTeam": "DET",
+      "side": "away",
+      "team": "DET",
+      "market": "spread",
+      "point": 3.0,
+      "line": 3.0,
+      "decimal": 1.99,
+      "price": -101,
+      "lineSource": "odds-api",
+      "lineBook": "LowVig.ag",
+      "model_prob": 0.7359,
+      "ev": 0.4645,
+      "bucket": "pos_ev",
+      "result": null,
+      "profit": null,
+      "gradedAt": null,
+      "gradeSource": null,
+      "awayScore": null,
+      "homeScore": null
+    },
     {
       "pickKey": "21718181|away|ml",
       "matchupId": "2026-11-24|DET|at|ORL|away|ml",
