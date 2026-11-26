@@ -2908,13 +2908,13 @@ game_id,game_date,datetime_utc,season,postseason,status,status_state,home_team,a
 21718181.0,2026-11-24,2026-11-25T00:00:00.000Z,2026.0,False,Final,final,Orlando Magic,Detroit Pistons,ORL,DET,86,104,
 21718182.0,2026-11-24,2026-11-25T01:00:00.000Z,2026.0,False,Final,final,Washington Wizards,Boston Celtics,WAS,BOS,116,131,
 21718183.0,2026-11-24,2026-11-25T03:00:00.000Z,2026.0,False,Final,final,Denver Nuggets,Dallas Mavericks,DEN,DAL,101,120,
-21718184.0,2026-11-25,2026-11-25T22:00Z,,False,Scheduled,in_progress,Philadelphia 76ers,Miami Heat,PHI,MIA,0,0,espn
-21718185.0,2026-11-25,2026-11-26T00:00Z,,False,Scheduled,in_progress,Charlotte Hornets,Chicago Bulls,CHA,CHI,0,0,espn
-21718186.0,2026-11-25,2026-11-26T00:30Z,,False,Scheduled,in_progress,New York Knicks,Cleveland Cavaliers,NYK,CLE,0,0,espn
-21718187.0,2026-11-25,2026-11-26T00:30Z,,False,Scheduled,in_progress,Oklahoma City Thunder,Minnesota Timberwolves,OKC,MIN,0,0,espn
-21718188.0,2026-11-25,2026-11-26T01:00Z,,False,Scheduled,in_progress,Memphis Grizzlies,LA Clippers,MEM,LAC,0,0,espn
-21718189.0,2026-11-25,2026-11-26T01:00Z,,False,Scheduled,in_progress,Milwaukee Bucks,Brooklyn Nets,MIL,BKN,0,0,espn
-21718190.0,2026-11-25,2026-11-26T01:30Z,,False,Scheduled,in_progress,Houston Rockets,Phoenix Suns,HOU,PHX,0,0,espn
+21718184.0,2026-11-25,2026-11-25T22:00Z,,False,Final,final,Philadelphia 76ers,Miami Heat,PHI,MIA,111,104,espn
+21718185.0,2026-11-25,2026-11-26T00:00Z,,False,Final,final,Charlotte Hornets,Chicago Bulls,CHA,CHI,105,107,espn
+21718186.0,2026-11-25,2026-11-26T00:30Z,,False,In Progress,in_progress,New York Knicks,Cleveland Cavaliers,NYK,CLE,101,91,espn
+21718187.0,2026-11-25,2026-11-26T00:30Z,,False,In Progress,in_progress,Oklahoma City Thunder,Minnesota Timberwolves,OKC,MIN,88,92,espn
+21718188.0,2026-11-25,2026-11-26T01:00Z,,False,In Progress,in_progress,Memphis Grizzlies,LA Clippers,MEM,LAC,68,54,espn
+21718189.0,2026-11-25,2026-11-26T01:00Z,,False,In Progress,in_progress,Milwaukee Bucks,Brooklyn Nets,MIL,BKN,67,68,espn
+21718190.0,2026-11-25,2026-11-26T01:30Z,,False,In Progress,in_progress,Houston Rockets,Phoenix Suns,HOU,PHX,46,49,espn
 21718191.0,2026-11-25,2026-11-26T03:00Z,,False,Scheduled,in_progress,Golden State Warriors,Sacramento Kings,GSW,SAC,0,0,espn
 21718192.0,2026-11-25,2026-11-26T03:00Z,,False,Scheduled,in_progress,Portland Trail Blazers,San Antonio Spurs,POR,SAS,0,0,espn
 21718193.0,2026-11-27,2026-11-28T00:00:00.000Z,2026.0,False,2026-11-28T00:00:00Z,scheduled,New York Knicks,Miami Heat,NYK,MIA,0,0,
