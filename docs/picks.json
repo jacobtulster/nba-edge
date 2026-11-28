@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28T13:52:57.788422+00:00",
+  "updatedAt": "2026-11-28T21:32:19.180311+00:00",
   "minEv": 0.0,
   "primaryMarket": "spread",
   "summary": {
@@ -23,7 +23,7 @@
     "roi": 0.0379
   },
   "summary_ml": {
-    "picks": 52,
+    "picks": 53,
     "graded": 48,
     "w": 20,
     "l": 28,
@@ -1911,6 +1911,39 @@
     }
   ],
   "picks": [
+    {
+      "pickKey": "21718205|away|ml",
+      "matchupId": "2026-11-28|BKN|at|CHA|away|ml",
+      "loggedAt": "2026-11-28T21:32:13.914740+00:00",
+      "sport": "NBA",
+      "league": "NBA",
+      "date": "2026-11-28",
+      "game_id": 21718205,
+      "away": "Brooklyn Nets",
+      "home": "Charlotte Hornets",
+      "away_abbreviation": "BKN",
+      "home_abbreviation": "CHA",
+      "takeSide": "away",
+      "takeTeam": "BKN",
+      "side": "away",
+      "team": "BKN",
+      "market": "ml",
+      "point": null,
+      "line": 235,
+      "decimal": 3.35,
+      "price": 235,
+      "lineSource": "odds-api",
+      "lineBook": "BetUS",
+      "model_prob": 0.3128,
+      "ev": 0.048,
+      "bucket": "pos_ev",
+      "result": null,
+      "profit": null,
+      "gradedAt": null,
+      "gradeSource": null,
+      "awayScore": null,
+      "homeScore": null
+    },
     {
       "pickKey": "21718206|home|ml",
       "matchupId": "2026-11-28|IND|at|CHI|home|ml",
