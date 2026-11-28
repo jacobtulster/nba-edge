@@ -2917,17 +2917,17 @@ game_id,game_date,datetime_utc,season,postseason,status,status_state,home_team,a
 21718190.0,2026-11-25,2026-11-26T01:30:00.000Z,2026.0,False,Final,final,Houston Rockets,Phoenix Suns,HOU,PHX,116,104,
 21718191.0,2026-11-25,2026-11-26T03:00:00.000Z,2026.0,False,Final,final,Golden State Warriors,Sacramento Kings,GSW,SAC,129,110,
 21718192.0,2026-11-25,2026-11-26T03:00:00.000Z,2026.0,False,Final,final,Portland Trail Blazers,San Antonio Spurs,POR,SAS,116,111,
-21718193.0,2026-11-27,2026-11-28T00:00Z,,False,Scheduled,in_progress,New York Knicks,Miami Heat,NYK,MIA,0,0,espn
-21718194.0,2026-11-27,2026-11-28T00:30Z,,False,Scheduled,in_progress,Detroit Pistons,Milwaukee Bucks,DET,MIL,0,0,espn
-21718195.0,2026-11-27,2026-11-28T00:30Z,,False,Scheduled,in_progress,Indiana Pacers,Philadelphia 76ers,IND,PHI,0,0,espn
-21718196.0,2026-11-27,2026-11-28T00:30Z,,False,Scheduled,in_progress,Toronto Raptors,Brooklyn Nets,TOR,BKN,0,0,espn
-21718197.0,2026-11-27,2026-11-28T01:00Z,,False,Scheduled,in_progress,Boston Celtics,Atlanta Hawks,BOS,ATL,0,0,espn
-21718198.0,2026-11-27,2026-11-28T01:30Z,,False,Scheduled,in_progress,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,0,0,espn
-21718199.0,2026-11-27,2026-11-28T02:00Z,,False,Scheduled,in_progress,Phoenix Suns,Dallas Mavericks,PHX,DAL,0,0,espn
-21718200.0,2026-11-27,2026-11-28T02:30Z,,False,Scheduled,in_progress,San Antonio Spurs,Los Angeles Lakers,SAS,LAL,0,0,espn
-21718201.0,2026-11-27,2026-11-28T02:30Z,,False,Scheduled,in_progress,Utah Jazz,Denver Nuggets,UTA,DEN,0,0,espn
-21718202.0,2026-11-27,2026-11-28T02:30Z,,False,Scheduled,in_progress,LA Clippers,New Orleans Pelicans,LAC,NOP,0,0,espn
-21718203.0,2026-11-27,2026-11-28T02:30Z,,False,Scheduled,in_progress,Portland Trail Blazers,Golden State Warriors,POR,GSW,0,0,espn
+21718193.0,2026-11-27,2026-11-28T00:00Z,,False,Final,final,New York Knicks,Miami Heat,NYK,MIA,105,108,espn
+21718194.0,2026-11-27,2026-11-28T00:30Z,,False,Final,final,Detroit Pistons,Milwaukee Bucks,DET,MIL,113,98,espn
+21718195.0,2026-11-27,2026-11-28T00:30Z,,False,Final,final,Indiana Pacers,Philadelphia 76ers,IND,PHI,87,111,espn
+21718196.0,2026-11-27,2026-11-28T00:30Z,,False,Final,final,Toronto Raptors,Brooklyn Nets,TOR,BKN,124,100,espn
+21718197.0,2026-11-27,2026-11-28T01:00Z,,False,Final,final,Boston Celtics,Atlanta Hawks,BOS,ATL,86,87,espn
+21718198.0,2026-11-27,2026-11-28T01:30Z,,False,Final,final,Minnesota Timberwolves,Memphis Grizzlies,MIN,MEM,109,114,espn
+21718199.0,2026-11-27,2026-11-28T02:00Z,,False,In Progress,in_progress,Phoenix Suns,Dallas Mavericks,PHX,DAL,109,111,espn
+21718200.0,2026-11-27,2026-11-28T02:30Z,,False,In Progress,in_progress,San Antonio Spurs,Los Angeles Lakers,SAS,LAL,72,70,espn
+21718201.0,2026-11-27,2026-11-28T02:30Z,,False,In Progress,in_progress,Utah Jazz,Denver Nuggets,UTA,DEN,95,97,espn
+21718202.0,2026-11-27,2026-11-28T02:30Z,,False,In Progress,in_progress,LA Clippers,New Orleans Pelicans,LAC,NOP,82,85,espn
+21718203.0,2026-11-27,2026-11-28T02:30Z,,False,In Progress,in_progress,Portland Trail Blazers,Golden State Warriors,POR,GSW,91,80,espn
 21718204.0,2026-11-28,2026-11-28T22:00:00.000Z,2026.0,False,2026-11-28T22:00:00Z,scheduled,Washington Wizards,Orlando Magic,WAS,ORL,0,0,
 21718205.0,2026-11-28,2026-11-28T23:00:00.000Z,2026.0,False,2026-11-28T23:00:00Z,scheduled,Charlotte Hornets,Brooklyn Nets,CHA,BKN,0,0,
 21718206.0,2026-11-28,2026-11-29T01:00:00.000Z,2026.0,False,2026-11-29T01:00:00Z,scheduled,Chicago Bulls,Indiana Pacers,CHI,IND,0,0,
